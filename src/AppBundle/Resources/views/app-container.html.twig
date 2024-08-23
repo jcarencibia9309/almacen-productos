@@ -1,0 +1,20 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+
+    {% include 'AppBundle::layouts/sidebar.html.twig' %}
+
+    <div id="right-panel" class="right-panel">
+        {% include 'AppBundle::layouts/header.html.twig' %}
+        {% include 'AppBundle::layouts/breadcrumbs.html.twig' %}
+        <div class="content">
+            <div class="animated fadeIn">
+                {% block view %}{% endblock %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        {% include 'AppBundle::layouts/footer.html.twig' %}
+    </div>
+
+{% endblock %}
+
