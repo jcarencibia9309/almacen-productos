@@ -1,0 +1,4 @@
+app_categoria:
+    resource: "@AppBundle/Resources/config/routing/categoria.php"
+    prefix:   /categoria
+
