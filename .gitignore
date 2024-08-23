@@ -1,0 +1,19 @@
+# Symfony specific files
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+/app/config/parameters.yml
+
+# Composer dependencies
+/vendor/
+
+# IDE specific files
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other files you might want to ignore
+/public/bundles/
