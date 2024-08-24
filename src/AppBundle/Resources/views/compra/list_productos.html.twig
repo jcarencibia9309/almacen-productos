@@ -13,8 +13,13 @@
 ]
 %}
 
-<div class="pb-2">
-    <a href="{{ path('compra_producto_add', {'idCompra': compra.id}) }}" class="btn text-primary"><i class="fa fa-plus"></i> Adicionar</a>
-</div>
+{% set readOnly = readOnly is defined ? readOnly : false %}
 
-{% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': compra.productos, 'actions': actions}%}
+{% if readOnly == false %}
+    <div class="pb-2">
+        <a href="{{ path('compra_producto_add', {'idCompra': compra.id}) }}" class="btn text-primary"><i class="fa fa-plus"></i> Adicionar</a>
+    </div>
+{% endif %}
+
+
+{% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': compra.productos, 'actions': actions, 'readOnly': readOnly}%}

@@ -18,6 +18,9 @@
                     </div>
 
                     <div class="form-actions pull-right">
+                        {% if compraProducto.id %}
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmModal">Eliminar</button>
+                        {% endif %}
                         <a href="{{ path('compra_edit', {id: idCompra}) }}" class="btn btn-secondary btn-sm">Cancelar</a>
                         <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
                     </div>
@@ -27,5 +30,9 @@
             </div>
         </div>
     </div>
+
+    {% if compraProducto.id %}
+        {% include 'AppBundle::components/confirm_modal.html.twig' with {'color': 'danger', 'btnLabel':'Eliminar', 'btnForm': delete_form}%}
+    {% endif %}
 
 {% endblock %}

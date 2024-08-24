@@ -31,3 +31,7 @@ select option:first-child {
     background: #f3f3f3;
     display: block;
 }
+
+.modal-header {
+    display: flex !important;
+}

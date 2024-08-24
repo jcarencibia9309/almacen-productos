@@ -6,6 +6,7 @@
         set fields = [
             {'label': 'Fecha de Recepción', 'name': 'fechaRecepcion', 'type': 'date'},
             {'label': 'Almacén destino', 'name': 'almacenDestino', 'type': 'nomenclator'},
+            {'label': 'Importe', 'name': 'importe'},
             {'label': 'Estado', 'name': 'estadoProceso', 'type': 'nomenclator'}
         ]
     %}
@@ -14,11 +15,19 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <strong>Detalles de categoría</strong>
+                    <strong>Detalles de la compra</strong>
                 </div>
                 <div class="card-body card-block">
 
                     {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': compra, 'size': 'col-3'}%}
+
+                    <br>
+
+                    <b>Productos</b>
+                    <br>
+                    {% include 'AppBundle::compra/list_productos.html.twig' with {'comra': compra, 'readOnly': true}%}
+
+                    <br>
 
                     <div class="pull-right">
                         <a href="{{ path('compra_index') }}" class="btn btn-primary btn-sm">Atrás</a>

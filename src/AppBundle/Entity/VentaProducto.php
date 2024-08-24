@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -23,6 +24,7 @@ class VentaProducto
     private $precioVenta;
 
     /**
+     * @Assert\GreaterThan(value=0, message="El valor debe de ser mayor que 0")
      * @ORM\Column(name="cantidad", type="integer")
      */
     private $cantidad;

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Core\Base\BaseController;
 use AppBundle\Entity\CompraProducto;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Compra;
@@ -145,7 +146,45 @@ class CompraController extends BaseController
             'idCompra' => $idCompra,
             'compraProducto' => $compraProducto,
             'form' => $form->createView(),
-            'title' => 'Modificar producto de compra'
+            'title' => 'Modificar producto de compra',
+            'delete_form' => $this->createDeleteProductoForm($compraProducto)->createView()
         ));
+    }
+
+    /**
+     * @Route("/{idCompra}/producto/{id}/delete", name="compra_producto_delete", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param CompraProducto $compraProducto
+     * @param $idCompra
+     * @return Response|null
+     */
+    public function deleteProductoAction(Request $request, CompraProducto $compraProducto, $idCompra)
+    {
+        $form = $this->createDeleteProductoForm($compraProducto);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($compraProducto);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('compra_edit', array('id' => $idCompra));
+    }
+
+    /**
+     * @param CompraProducto $compraProducto
+     * @return Form The form
+     */
+    private function createDeleteProductoForm(CompraProducto $compraProducto)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('compra_producto_delete', array(
+                'id' => $compraProducto->getId(),
+                'idCompra' => $compraProducto->getCompra()->getId()
+            )))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 }

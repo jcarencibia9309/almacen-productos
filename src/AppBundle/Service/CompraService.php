@@ -47,7 +47,24 @@ class CompraService extends BaseService {
         $importe = $producto->getPrecioCompra() * $producto->getCantidad();
         $producto->setImporte($importe);
         $em->persist($producto);
+
+        $compra = $producto->getCompra();
+        $this->_calcularImporte($compra);
+
+        $em->persist($compra);
+
         $em->flush();
+    }
+
+    /**
+     * @param Compra $compra
+     */
+    private function _calcularImporte($compra) {
+        $importe = 0;
+        foreach ($compra->getProductos() as $producto) {
+            $importe += $producto->getImporte();
+        }
+        $compra->setImporte($importe);
     }
 
 

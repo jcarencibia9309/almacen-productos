@@ -11,9 +11,13 @@
                 <div class="card-body card-block">
                     {{ form_start(form) }}
 
-                    <div class="row">
+                    <div class="row gap-2">
                         <div class="col-xs-12 col-md-6">
                             {{ form_widget(form) }}
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            {% set fields = [{'label': 'Importe', 'name': 'importe'}] %}
+                            {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': compra, 'size': 'col-6'}%}
                         </div>
                     </div>
 
