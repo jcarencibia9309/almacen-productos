@@ -3,10 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name = "ncategoria")
+ * @UniqueEntity(fields={"nombre"}, message="Ya existe una categoría con el mismo nombre.")
  */
 class Categoria
 {
@@ -18,7 +21,8 @@ class Categoria
     private $id;
 
     /**
-     * @ORM\Column(name="nombre", type="string")
+     * @Assert\NotNull
+     * @ORM\Column(name="nombre", type="string", unique=true)
      */
     private $nombre;
 

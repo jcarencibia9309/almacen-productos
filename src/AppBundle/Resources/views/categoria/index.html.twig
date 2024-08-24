@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body">
                     <div class="pb-2">
-                        <a href="{{ path('categoria_new') }}" class="btn text-primary"><i class="fa fa-plus"></i>&nbsp; Adicionar</a>
+                        <a href="{{ path('categoria_add') }}" class="btn text-primary"><i class="fa fa-plus"></i>&nbsp; Adicionar</a>
                     </div>
 
                     {% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': categorias, 'actions': actions}%}

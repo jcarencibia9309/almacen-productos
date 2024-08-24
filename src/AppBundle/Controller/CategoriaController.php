@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Core\Base\BaseController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Categoria;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,18 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
  * Categoria controller.
  *  @Route("/categoria")
  */
-class CategoriaController extends Controller
+class CategoriaController extends BaseController
 {
+
     /**
      * @Route("/", name="categoria_index", methods={"GET"})
      *
      * @return Response|null
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $categorias = $em->getRepository('AppBundle:Categoria')->findAll();
+    public function indexAction() {
+        $categorias = $this->getCategoriaSrv()->getAll();
 
         return $this->render('AppBundle:categoria:index.html.twig', array(
             'categorias' => $categorias,
@@ -32,26 +30,23 @@ class CategoriaController extends Controller
     }
 
     /**
-     * @Route("/new", name="categoria_new", methods={"GET", "POST"})
+     * @Route("/add", name="categoria_add", methods={"GET", "POST"})
      *
      * @param Request $request
      * @return Response|null
      */
-    public function newAction(Request $request)
+    public function addAction(Request $request)
     {
         $categoria = new Categoria();
         $form = $this->createForm('AppBundle\Form\CategoriaType', $categoria);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($categoria);
-            $em->flush();
-
+            $this->getCategoriaSrv()->save($categoria);
             return $this->redirectToRoute('categoria_index');
         }
 
-        return $this->render('AppBundle:form:new.html.twig', array(
+        return $this->render('AppBundle:categoria:edit.html.twig', array(
             'categoria' => $categoria,
             'title' => 'Adicionar categoría',
             'form' => $form->createView(),
@@ -66,11 +61,11 @@ class CategoriaController extends Controller
      */
     public function showAction(Categoria $categoria)
     {
-        $deleteForm = $this->createDeleteForm($categoria);
+//        $deleteForm = $this->createDeleteForm($categoria);
 
         return $this->render('AppBundle:categoria:show.html.twig', array(
             'categoria' => $categoria,
-            'delete_form' => $deleteForm->createView(),
+//            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -83,23 +78,18 @@ class CategoriaController extends Controller
      */
     public function editAction(Request $request, Categoria $categoria)
     {
-        $deleteForm = $this->createDeleteForm($categoria);
-        $editForm = $this->createForm('AppBundle\Form\CategoriaType', $categoria);
-        $editForm->handleRequest($request);
+        $form = $this->createForm('AppBundle\Form\CategoriaType', $categoria);
+        $form->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($categoria);
-            $em->flush();
-
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getCategoriaSrv()->save($categoria);
             return $this->redirectToRoute('categoria_index');
         }
 
         return $this->render('AppBundle:categoria:edit.html.twig', array(
             'categoria' => $categoria,
-            'form' => $editForm->createView(),
-            'title' => 'Modificar categoría',
-            'delete_form' => $deleteForm->createView(),
+            'form' => $form->createView(),
+            'title' => 'Modificar categoría'
         ));
     }
 
