@@ -36,6 +36,8 @@ twig:
     strict_variables: "%kernel.debug%"
     paths:
         '%kernel.root_dir%/../src/AppBundle/Resources/views': AppBundle
+    globals:
+        appConfig: '@app.config'
 
 # Doctrine Configuration
 doctrine:

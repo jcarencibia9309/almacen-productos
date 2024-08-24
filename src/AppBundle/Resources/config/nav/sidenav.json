@@ -1,0 +1,46 @@
+[
+  {
+    "label": "Inicio",
+    "path": "homepage",
+    "icon": "ti-home"
+  },
+  {
+    "section": "Gestión"
+  },
+  {
+    "label": "Almacenes",
+    "url": "",
+    "icon": "ti-layout-grid3"
+  },
+  {
+    "label": "Productos",
+    "url": "",
+    "icon": "ti-package"
+  },
+  {
+    "label": "Categorias de productos",
+    "path": "categoria_index",
+    "icon": "fa fa-list-alt"
+  },
+  {
+    "section": "Procesos"
+  },
+  {
+    "label": "Compras",
+    "url": "",
+    "icon": "ti-receipt"
+  },
+  {
+    "label": "Compras",
+    "url": "",
+    "icon": "ti-receipt"
+  },
+  {
+    "section": "Reportes"
+  },
+  {
+    "label": "Inventario",
+    "url": "",
+    "icon": "ti-file"
+  }
+]
