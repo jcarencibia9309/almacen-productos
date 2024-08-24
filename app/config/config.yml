@@ -34,6 +34,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'AppBundle::form/fields.html.twig'
     paths:
         '%kernel.root_dir%/../src/AppBundle/Resources/views': AppBundle
     globals:

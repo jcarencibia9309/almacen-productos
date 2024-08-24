@@ -39,20 +39,21 @@ class CategoriaController extends Controller
      */
     public function newAction(Request $request)
     {
-        $categorium = new Categoria();
-        $form = $this->createForm('AppBundle\Form\CategoriaType', $categorium);
+        $categoria = new Categoria();
+        $form = $this->createForm('AppBundle\Form\CategoriaType', $categoria);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($categorium);
+            $em->persist($categoria);
             $em->flush();
 
-            return $this->redirectToRoute('categoria_show', array('id' => $categorium->getId()));
+            return $this->redirectToRoute('categoria_index');
         }
 
-        return $this->render('AppBundle:categoria:new.html.twig', array(
-            'categorium' => $categorium,
+        return $this->render('AppBundle:form:new.html.twig', array(
+            'categoria' => $categoria,
+            'title' => 'Adicionar categoría',
             'form' => $form->createView(),
         ));
     }
@@ -68,7 +69,7 @@ class CategoriaController extends Controller
         $deleteForm = $this->createDeleteForm($categoria);
 
         return $this->render('AppBundle:categoria:show.html.twig', array(
-            'categorium' => $categoria,
+            'categoria' => $categoria,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -91,12 +92,13 @@ class CategoriaController extends Controller
             $em->persist($categoria);
             $em->flush();
 
-            return $this->redirectToRoute('categoria_edit', array('id' => $categoria->getId()));
+            return $this->redirectToRoute('categoria_index');
         }
 
         return $this->render('AppBundle:categoria:edit.html.twig', array(
-            'categorium' => $categoria,
-            'edit_form' => $editForm->createView(),
+            'categoria' => $categoria,
+            'form' => $editForm->createView(),
+            'title' => 'Modificar categoría',
             'delete_form' => $deleteForm->createView(),
         ));
     }

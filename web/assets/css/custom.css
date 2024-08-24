@@ -9,3 +9,13 @@
 .text-primary {
     color: #03a9f3 !important;
 }
+
+.form-check-input {
+    margin-left: 3px;
+}
+
+label.required:after {
+    color: red;
+    content: ' *';
+    display: inline;
+}

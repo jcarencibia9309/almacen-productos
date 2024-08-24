@@ -1,40 +1,32 @@
 {% extends 'AppBundle::app-container.html.twig' %}
 
 {% block view %}
-    <h1>Categoria</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ categorium.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ categorium.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ categorium.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Activo</th>
-                <td>{% if categorium.activo %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+    {%
+        set fields = [
+        {'label': 'Nombre', 'name': 'nombre'},
+        {'label': 'Descripción', 'name': 'descripcion'},
+        {'label': 'Activo', 'name': 'activo', 'type': 'boolean'}
+    ]
+    %}
 
-    <ul>
-        <li>
-            <a href="{{ path('categoria_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('categoria_edit', { 'id': categorium.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Detalles de categoría</strong>
+                </div>
+                <div class="card-body card-block">
+
+                    {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': categoria, 'size': 'col-3'}%}
+
+                    <div class="pull-right">
+                        <a href="{{ path('categoria_index') }}" class="btn btn-primary btn-sm">Atrás</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
