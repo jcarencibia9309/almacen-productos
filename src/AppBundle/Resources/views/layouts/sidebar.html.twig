@@ -1,9 +1,24 @@
+{%
+    set nav = [
+        { "label": "Inicio", "path": "homepage", "icon": "ti-home" },
+        { "section": "Gestión" },
+        { "label": "Almacenes", "url": "", "icon": "ti-layout-grid3" },
+        { "label": "Productos", "url": "", "icon": "ti-package" },
+        { "label": "Categorías de productos", "path": "categoria_index", "icon": "fa fa-list-alt" },
+        { "section": "Procesos" },
+        { "label": "Compras", "url": "", "icon": "ti-receipt" },
+        { "label": "Compras", "url": "", "icon": "ti-receipt" },
+        { "section": "Reportes" },
+        { "label": "Inventario", "url": "", "icon": "ti-file" }
+    ]
+%}
+
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                {% for navItem in appConfig.getSideNav() %}
+                {% for navItem in nav %}
                     {% if navItem.section is defined %}
                         <li class="menu-title">{{ navItem.section }}</li>
                     {% elseif navItem.path is defined %}

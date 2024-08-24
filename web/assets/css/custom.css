@@ -5,3 +5,7 @@
 .breadcrumb a.active {
     color: #a2a2a2;
 }
+
+.text-primary {
+    color: #03a9f3 !important;
+}

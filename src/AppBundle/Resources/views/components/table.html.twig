@@ -1,0 +1,42 @@
+<table id="bootstrap-data-table" class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        {% for column in columns %}
+            <th>{{ column.label }}</th>
+        {% endfor %}
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            <tr>
+                {% for column in columns %}
+                    {% set dataType = column.type is defined ? column.type : 'string' %}
+                    <td>{{ dataTransform.transform(attribute(item, column.name), dataType) }}</td>
+                {% endfor %}
+                <td>
+                    {% for action in actions %}
+                        <a href="{{ path(action.path, { 'id': item.id }) }}" class="btn text-primary" title="{{ action.label }}"><i class="{{ action.icon }}"></i></a>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<link rel="stylesheet" href="{{ asset('assets/css/lib/datatable/dataTables.bootstrap.min.css') }}">
+<script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/jszip.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
+<script src="{{ asset('assets/js/init/datatables-init.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
+    } );
+</script>

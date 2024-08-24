@@ -37,7 +37,7 @@ twig:
     paths:
         '%kernel.root_dir%/../src/AppBundle/Resources/views': AppBundle
     globals:
-        appConfig: '@app.config'
+        dataTransform: '@app.data_transform'
 
 # Doctrine Configuration
 doctrine:
