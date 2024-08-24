@@ -1,0 +1,37 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    {%
+        set columns = [
+            {'label': 'Fecha de Recepción', 'name': 'fechaRecepcion', 'type': 'date'},
+            {'label': 'Almacén destino', 'name': 'almacenDestino', 'type': 'nomenclator'},
+            {'label': 'Estado', 'name': 'estadoProceso', 'type': 'nomenclator'}
+        ]
+    %}
+
+    {%
+        set actions = [
+            {'label': 'Detalles', 'icon': 'fa fa-list-alt', 'path': 'compra_show' },
+            {'label': 'Modificar', 'icon': 'fa fa-pencil', 'path': 'compra_edit' }
+        ]
+    %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Compras</strong>
+                </div>
+                <div class="card-body">
+                    <div class="pb-2">
+                        <a href="{{ path('compra_add') }}" class="btn text-primary"><i class="fa fa-plus"></i> Adicionar</a>
+                    </div>
+
+                    {% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': compras, 'actions': actions}%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -16,7 +16,10 @@
                 {% endfor %}
                 <td>
                     {% for action in actions %}
-                        <a href="{{ path(action.path, { 'id': item.id }) }}" class="btn text-primary" title="{{ action.label }}"><i class="{{ action.icon }}"></i></a>
+                        {% set pathParams = action.pathParams is defined ? action.pathParams : {} %}
+                        <a href="{{ path(action.path, { 'id': item.id }|merge(pathParams)) }}" class="btn text-primary" title="{{ action.label }}">
+                            <i class="{{ action.icon }}"></i>
+                        </a>
                     {% endfor %}
                 </td>
             </tr>

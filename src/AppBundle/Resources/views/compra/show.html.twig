@@ -1,0 +1,32 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    {%
+        set fields = [
+            {'label': 'Fecha de Recepción', 'name': 'fechaRecepcion', 'type': 'date'},
+            {'label': 'Almacén destino', 'name': 'almacenDestino', 'type': 'nomenclator'},
+            {'label': 'Estado', 'name': 'estadoProceso', 'type': 'nomenclator'}
+        ]
+    %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Detalles de categoría</strong>
+                </div>
+                <div class="card-body card-block">
+
+                    {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': compra, 'size': 'col-3'}%}
+
+                    <div class="pull-right">
+                        <a href="{{ path('compra_index') }}" class="btn btn-primary btn-sm">Atrás</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -23,7 +23,7 @@ class Compra
     private $fechaRecepcion;
 
     /**
-     * @ORM\Column(name="importe", type="decimal", length=10, scale=2)
+     * @ORM\Column(name="importe", type="decimal", length=10, scale=2, nullable=true)
      */
     private $importe;
 
@@ -34,6 +34,20 @@ class Compra
      * })
      */
     private $almacenDestino;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="EstadoProceso")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="nestado_proceso", referencedColumnName="id")
+     * })
+     */
+    private $estadoProceso;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CompraProducto", mappedBy="compra", cascade={"persist","refresh","remove"})
+     */
+    private $productos;
+
 
     /**
      * @return mixed
@@ -98,4 +112,38 @@ class Compra
     {
         $this->almacenDestino = $almacenDestino;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEstadoProceso()
+    {
+        return $this->estadoProceso;
+    }
+
+    /**
+     * @param mixed $estadoProceso
+     */
+    public function setEstadoProceso($estadoProceso)
+    {
+        $this->estadoProceso = $estadoProceso;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param mixed $productos
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
+    }
+
+
 }

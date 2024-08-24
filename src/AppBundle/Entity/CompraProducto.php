@@ -41,12 +41,16 @@ class CompraProducto
     private $producto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Compra")
+     * @ORM\ManyToOne(targetEntity="Compra", inversedBy="productos")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="compra_id", referencedColumnName="id")
      * })
      */
     private $compra;
+
+    public function getNombre() {
+        return $this->producto->getNombre();
+    }
 
     /**
      * @return mixed

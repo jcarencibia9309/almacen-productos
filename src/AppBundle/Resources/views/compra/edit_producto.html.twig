@@ -3,7 +3,7 @@
 {% block view %}
 
     <div class="row">
-        <div class="col-xs-12 col-xl-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <strong>{{ title }}</strong>
@@ -11,10 +11,14 @@
                 <div class="card-body card-block">
                     {{ form_start(form) }}
 
-                    {{ form_widget(form) }}
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            {{ form_widget(form) }}
+                        </div>
+                    </div>
 
                     <div class="form-actions pull-right">
-                        <a href="{{ path('almacen_index') }}" class="btn btn-secondary btn-sm">Cancelar</a>
+                        <a href="{{ path('compra_edit', {id: idCompra}) }}" class="btn btn-secondary btn-sm">Cancelar</a>
                         <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
                     </div>
 

@@ -1,0 +1,42 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ title }}</strong>
+                </div>
+                <div class="card-body card-block">
+                    {{ form_start(form) }}
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            {{ form_widget(form) }}
+                        </div>
+                    </div>
+
+                    {% if compra.id %}
+                        <b>Productos</b>
+                        <br>
+                        {% include 'AppBundle::compra/list_productos.html.twig' with {'comra': compra}%}
+                    {% endif %}
+
+                    <br>
+
+                    <div class="form-actions pull-right">
+                        <a href="{{ path('compra_index') }}" class="btn btn-secondary btn-sm">Cancelar</a>
+                        <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                        {% if compra.id %}
+                            <button type="submit" class="btn btn-primary btn-sm">Completar</button>
+                        {% endif %}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

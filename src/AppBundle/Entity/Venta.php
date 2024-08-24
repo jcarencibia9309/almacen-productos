@@ -33,6 +33,14 @@ class Venta
     private $importe;
 
     /**
+     * @ORM\ManyToOne(targetEntity="EstadoProceso")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="nestado_proceso", referencedColumnName="id")
+     * })
+     */
+    private $estadoProceso;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -94,6 +102,22 @@ class Venta
     public function setImporte($importe)
     {
         $this->importe = $importe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEstadoProceso()
+    {
+        return $this->estadoProceso;
+    }
+
+    /**
+     * @param mixed $estadoProceso
+     */
+    public function setEstadoProceso($estadoProceso)
+    {
+        $this->estadoProceso = $estadoProceso;
     }
 
 

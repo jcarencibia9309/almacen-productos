@@ -1,0 +1,20 @@
+{%
+    set columns = [
+    {'label': 'Nombre', 'name': 'nombre'},
+    {'label': 'Cantidad', 'name': 'cantidad'},
+    {'label': 'Precio compra', 'name': 'precioCompra'},
+    {'label': 'Importe', 'name': 'importe'}
+]
+%}
+
+{%
+    set actions = [
+    {'label': 'Modificar', 'icon': 'fa fa-pencil', 'path': 'compra_producto_edit', pathParams: {'idCompra': compra.id} }
+]
+%}
+
+<div class="pb-2">
+    <a href="{{ path('compra_producto_add', {'idCompra': compra.id}) }}" class="btn text-primary"><i class="fa fa-plus"></i> Adicionar</a>
+</div>
+
+{% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': compra.productos, 'actions': actions}%}

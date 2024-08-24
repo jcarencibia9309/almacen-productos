@@ -8,14 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name = "ncategoria")
- * @UniqueEntity(fields={"nombre"}, message="Ya existe una categoría con el mismo nombre.")
+ * @ORM\Table(name = "nestado_proceso")
+ * @UniqueEntity(fields={"nombre"}, message="Ya existe un estado con el mismo nombre.")
  */
-class Categoria
+class EstadoProceso
 {
-    const CARNES = 1;
-    const ELECTRODOMESTICOS = 2;
-    const ASEO = 3;
+    const INICIADA = 1;
+    const COMPLETADA = 2;
 
     /**
      * @ORM\Column(name="id", type="integer")
@@ -104,4 +103,6 @@ class Categoria
     {
         $this->descripcion = $descripcion;
     }
+
+
 }
