@@ -1,0 +1,39 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    {%
+        set columns = [
+            {'label': 'Nombre', 'name': 'nombre'},
+            {'label': 'Dirección', 'name': 'direccion'},
+            {'label': 'Teléfono', 'name': 'telefono'},
+            {'label': 'Responsable', 'name': 'responsable'},
+            {'label': 'Activo', 'name': 'activo', 'type': 'boolean'}
+        ]
+    %}
+
+    {%
+        set actions = [
+            {'label': 'Detalles', 'icon': 'fa fa-list-alt', 'path': 'almacen_show' },
+            {'label': 'Modificar', 'icon': 'fa fa-pencil', 'path': 'almacen_edit' }
+        ]
+    %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Almacenes</strong>
+                </div>
+                <div class="card-body">
+                    <div class="pb-2">
+                        <a href="{{ path('almacen_add') }}" class="btn text-primary"><i class="fa fa-plus"></i>&nbsp; Adicionar</a>
+                    </div>
+
+                    {% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': almacenes, 'actions': actions}%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

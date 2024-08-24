@@ -12,7 +12,7 @@
             <tr>
                 {% for column in columns %}
                     {% set dataType = column.type is defined ? column.type : 'string' %}
-                    <td>{{ dataTransform.transform(attribute(item, column.name), dataType) }}</td>
+                    <td>{{ dataTransform.transform(attribute(item, column.name), dataType)|default('-') }}</td>
                 {% endfor %}
                 <td>
                     {% for action in actions %}

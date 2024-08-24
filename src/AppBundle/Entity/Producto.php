@@ -33,27 +33,27 @@ class Producto
     private $cantidad;
 
     /**
-     * @ORM\Column(name="costo", type="decimal", length=10, precision=2)
+     * @ORM\Column(name="costo", type="decimal", length=10, scale=2)
      */
     private $costo;
 
     /**
-     * @ORM\Column(name="precio_venta", type="decimal", length=10, precision=2)
+     * @ORM\Column(name="precio_venta", type="decimal", length=10, scale=2)
      */
     private $precioVenta;
 
     /**
-     * @ORM\Column(name="peso_gramos", type="decimal", length=10, precision=2, nullable=true)
+     * @ORM\Column(name="peso_gramos", type="decimal", length=10, scale=2, nullable=true)
      */
     private $pesoGramos;
 
     /**
-     * @ORM\Column(name="peso_onzas", type="decimal", length=10, precision=2, nullable=true)
+     * @ORM\Column(name="peso_onzas", type="decimal", length=10, scale=2, nullable=true)
      */
     private $pesoOnzas;
 
     /**
-     * @ORM\Column(name="peso_libras", type="decimal", length=10, precision=2, nullable=true)
+     * @ORM\Column(name="peso_libras", type="decimal", length=10, scale=2, nullable=true)
      */
     private $pesoLibras;
 

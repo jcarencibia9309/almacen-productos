@@ -28,7 +28,7 @@ class Venta
     private $cliente;
 
     /**
-     * @ORM\Column(name="importe", type="decimal", length=10, precision=2)
+     * @ORM\Column(name="importe", type="decimal", length=10, scale=2)
      */
     private $importe;
 

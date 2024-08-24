@@ -18,12 +18,12 @@ class Almacen
     private $id;
 
     /**
-     * @ORM\Column(name="latitud", type="decimal", length=9, precision=6, nullable = true)
+     * @ORM\Column(name="latitud", type="decimal", length=9, scale=6, nullable = true)
      */
     private $latitud;
 
     /**
-     * @ORM\Column(name="longitud", type="decimal", length=9, precision=6, nullable = true)
+     * @ORM\Column(name="longitud", type="decimal", length=9, scale=6, nullable = true)
      */
     private $longitud;
 
@@ -38,12 +38,12 @@ class Almacen
     private $direccion;
 
     /**
-     * @ORM\Column(name="responsable", type="string")
+     * @ORM\Column(name="responsable", type="string", nullable=true)
      */
     private $responsable;
 
     /**
-     * @ORM\Column(name="telefono", type="string")
+     * @ORM\Column(name="telefono", type="string", nullable=true)
      */
     private $telefono;
 

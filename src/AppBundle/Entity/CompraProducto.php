@@ -18,7 +18,7 @@ class CompraProducto
     private $id;
 
     /**
-     * @ORM\Column(name="precio_compra", type="decimal", length=10, precision=2)
+     * @ORM\Column(name="precio_compra", type="decimal", length=10, scale=2)
      */
     private $precioCompra;
 
@@ -28,7 +28,7 @@ class CompraProducto
     private $cantidad;
 
     /**
-     * @ORM\Column(name="importe", type="decimal", length=10, precision=2)
+     * @ORM\Column(name="importe", type="decimal", length=10, scale=2)
      */
     private $importe;
 

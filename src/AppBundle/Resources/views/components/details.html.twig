@@ -16,10 +16,10 @@
         {% set size = field.size is defined ? field.size : defaultSize %}
         {% set dataType = field.type is defined ? field.type : 'string' %}
 
-        <div class="{{ attribute(sizeClasses, size) }} mb-2">
+        <div class="{{ attribute(sizeClasses, size) }} mb-4">
             <b>{{ field.label }}</b>
             <br>
-            {{ dataTransform.transform(attribute(data, field.name), dataType) }}
+            {{ dataTransform.transform(attribute(data, field.name), dataType)|default('-') }}
         </div>
 
     {% endfor %}

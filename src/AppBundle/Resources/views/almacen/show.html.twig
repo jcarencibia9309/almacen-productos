@@ -1,0 +1,36 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    {%
+        set fields = [
+        {'label': 'Nombre', 'name': 'nombre'},
+        {'label': 'Dirección', 'name': 'direccion'},
+        {'label': 'Teléfono', 'name': 'telefono'},
+        {'label': 'Responsable', 'name': 'responsable'},
+        {'label': 'Latitud', 'name': 'latitud'},
+        {'label': 'Longitud', 'name': 'longitud'},
+        {'label': 'Activo', 'name': 'activo', 'type': 'boolean'}
+    ]
+    %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Detalles del almacén</strong>
+                </div>
+                <div class="card-body card-block">
+
+                    {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': almacen, 'size': 'col-3'}%}
+
+                    <div class="pull-right">
+                        <a href="{{ path('almacen_index') }}" class="btn btn-primary btn-sm">Atrás</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

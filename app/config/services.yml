@@ -14,3 +14,21 @@ services:
     app.categoria:
         class: AppBundle\Service\CategoriaService
         autowire: true
+
+    app.almacen:
+        class: AppBundle\Service\AlmacenService
+        autowire: true
+
+    app.producto:
+        class: AppBundle\Service\ProductoService
+        autowire: true
+
+    app.compra:
+        class: AppBundle\Service\CompraService
+        autowire: true
+
+    app.venta:
+        class: AppBundle\Service\VentaService
+        autowire: true
+
+

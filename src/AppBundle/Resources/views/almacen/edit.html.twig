@@ -1,0 +1,26 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ title }}</strong>
+                </div>
+                <div class="card-body card-block">
+                    {{ form_start(form) }}
+
+                    {{ form_widget(form) }}
+
+                    <div class="form-actions pull-right">
+                        <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
