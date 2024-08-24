@@ -19,3 +19,15 @@ label.required:after {
     content: ' *';
     display: inline;
 }
+
+select option:first-child {
+    color: rgba(0, 0, 0, 0.5); /* Color con opacidad */
+}
+
+.photo {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    background: #f3f3f3;
+    display: block;
+}

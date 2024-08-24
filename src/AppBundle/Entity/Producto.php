@@ -236,6 +236,18 @@ class Producto
     }
 
     /**
+     * @return mixed
+     */
+    public function getFotoBase64()
+    {
+        if ($this->getFoto()) {
+            $blobData = stream_get_contents($this->getFoto());
+            return base64_encode($blobData);
+        }
+        return null;
+    }
+
+    /**
      * @param mixed $foto
      */
     public function setFoto($foto)

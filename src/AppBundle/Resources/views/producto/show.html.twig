@@ -1,0 +1,48 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    {%
+        set fields = [
+        {'label': 'Nombre', 'name': 'nombre'},
+        {'label': 'UPC', 'name': 'upc'},
+        {'label': 'Marca', 'name': 'marca'},
+        {'label': 'Categoría', 'name': 'categoria', type: 'nomenclator'},
+        {'label': 'Peso (gramos)', 'name': 'pesoGramos'},
+        {'label': 'Peso (onzas)', 'name': 'pesoOnzas'},
+        {'label': 'Peso (libras)', 'name': 'pesoLibras'},
+        {'label': 'Descripción (ES)', 'name': 'descripcionEs'},
+        {'label': 'Descripción (EN)', 'name': 'descripcionEn'},
+        {'label': 'Foto', 'name': 'foto'},
+        {'label': 'Fecha expiración', 'name': 'fechaExpiracion', type: 'date'},
+        {'label': 'Activo', 'name': 'activo', 'type': 'boolean'}
+    ]
+    %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Detalles del producto</strong>
+                </div>
+                <div class="card-body card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
+                            <img class="photo" src="data:image/jpg;base64,{{ producto.fotoBase64 }}" alt="">
+                        </div>
+                        <div class="col-xs-12 col-lg-8">
+                            {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': producto, 'size': 'col-3'}%}
+                        </div>
+                    </div>
+
+                    <div class="pull-right">
+                        <a href="{{ path('producto_index') }}" class="btn btn-primary btn-sm">Atrás</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

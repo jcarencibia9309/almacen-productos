@@ -1,0 +1,40 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    {%
+        set columns = [
+            {'label': 'Nombre', 'name': 'nombre'},
+            {'label': 'UPC', 'name': 'upc'},
+            {'label': 'Marca', 'name': 'marca'},
+            {'label': 'Categoría', 'name': 'categoria', type: 'nomenclator'},
+            {'label': 'Peso(g)', 'name': 'pesoGramos'},
+            {'label': 'Activo', 'name': 'activo', 'type': 'boolean'}
+        ]
+    %}
+
+    {%
+        set actions = [
+            {'label': 'Detalles', 'icon': 'fa fa-list-alt', 'path': 'producto_show' },
+            {'label': 'Modificar', 'icon': 'fa fa-pencil', 'path': 'producto_edit' }
+        ]
+    %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Productos</strong>
+                </div>
+                <div class="card-body">
+                    <div class="pb-2">
+                        <a href="{{ path('producto_add') }}" class="btn text-primary"><i class="fa fa-plus"></i>&nbsp; Adicionar</a>
+                    </div>
+
+                    {% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': productos, 'actions': actions}%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

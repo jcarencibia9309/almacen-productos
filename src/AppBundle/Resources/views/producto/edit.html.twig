@@ -1,0 +1,36 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ title }}</strong>
+                </div>
+                <div class="card-body card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
+                            <img class="photo" src="data:image/jpg;base64,{{ producto.fotoBase64 }}" alt="">
+                        </div>
+                        <div class="col-xs-12 col-lg-8">
+                            {{ form_start(form) }}
+
+                            {{ form_widget(form) }}
+
+                            <div class="form-actions pull-right">
+                                <a href="{{ path('producto_index') }}" class="btn btn-secondary btn-sm">Cancelar</a>
+                                <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                            </div>
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

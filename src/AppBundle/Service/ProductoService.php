@@ -19,6 +19,9 @@ class ProductoService extends BaseService {
      */
     function save($producto) {
         $em = $this->getEm();
+        if (is_object($producto->getFoto())) {
+            $producto->setFoto(file_get_contents($producto->getFoto()->getPathname()));
+        }
         $em->persist($producto);
         $em->flush();
     }
