@@ -18,7 +18,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -77,3 +77,4 @@ knp_snappy:
         binary: '%kernel.root_dir%/../bin/wkhtmltopdf.exe'
         options:
             encoding: UTF-8
+
