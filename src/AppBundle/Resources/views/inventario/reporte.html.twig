@@ -1,0 +1,67 @@
+<style type="text/css">
+    .text-md {font-size: 14px;}
+    .mt-6 { margin-top: 60px; }
+    .mt-8 { margin-top: 80px; }
+    .ml-6 { margin-left: 60px; }
+    .font-bold { font-weight: bold }
+    .border-t { border-top: 1px solid black; }
+    .border-b { border-bottom: 1px solid black; }
+    .w-300 {width: 300px}
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+
+<div class="text-md">
+
+    <table style="width: 100%;">
+        <tr>
+            <td style="text-align: left;"><b>Creado:</b> Usuario</td>
+            <td style="text-align: center;"><b>TKC - LISTADO DE INVENTARIO</b></td>
+            <td style="text-align: right;"><b>FECHA:</b> {{ fecha }}</td>
+        </tr>
+    </table>
+
+    <div class="mt-6">
+       <span><b>Almacén:</b> {{ almacen.nombre }}</span>
+       <span class="ml-6"><b>Fecha:</b> {{ fecha }}</span>
+    </div>
+
+    <div class="mt-8">
+        <table class="text-md">
+            <thead class="font-bold">
+                <tr class="border-t">
+                    <td>Nro</td>
+                    <td>Cod. Prod.</td>
+                    <td class="w-300">Nombre</td>
+                    <td>Exist. Física</td>
+                    <td>Conteo</td>
+                    <td>Dif.</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria, productos in categorias %}
+                    <tr class="border-t border-b">
+                        <td colspan="6">{{ categoria }}</td>
+                    </tr>
+                    {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.numero }}</td>
+                            <td>{{ producto.codigo }}</td>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.existencia_fisica }}</td>
+                            <td>_______</td>
+                            <td>_______</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>

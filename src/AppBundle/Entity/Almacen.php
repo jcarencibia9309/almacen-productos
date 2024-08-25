@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AlmacenRepository")
  * @ORM\Table(name = "dalmacen")
  * @UniqueEntity(fields={"nombre"}, message="Ya existe un almacén con el mismo nombre.")
  */
