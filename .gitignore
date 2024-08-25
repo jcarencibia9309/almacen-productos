@@ -4,7 +4,7 @@
 /app/logs/*
 
 # Composer dependencies
-/vendor/
+#/vendor/
 
 # IDE specific files
 .idea/
