@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Core\Base\BaseController;
+use AppBundle\Entity\ProductoAlmacen;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Almacen;
@@ -63,6 +64,20 @@ class AlmacenController extends BaseController
     {
         return $this->render('AppBundle:almacen:show.html.twig', array(
             'almacen' => $almacen
+        ));
+    }
+
+    /**
+     * @Route("/{idAlmacen}/producto/{id}", name="almacen_producto_show", methods={"GET"})
+     *
+     * @param ProductoAlmacen $productoAlmacen
+     * @return Response|null
+     */
+    public function showProductoAction(ProductoAlmacen $productoAlmacen, $idAlmacen)
+    {
+        return $this->render('AppBundle:almacen:show_producto.html.twig', array(
+            'producto' => $productoAlmacen,
+            'idAlmacen' => $idAlmacen
         ));
     }
 

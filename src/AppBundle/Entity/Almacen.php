@@ -54,6 +54,10 @@ class Almacen
      */
     private $activo;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ProductoAlmacen", mappedBy="almacen", cascade={"persist","refresh","remove"})
+     */
+    private $productos;
 
 
     /**
@@ -70,6 +74,22 @@ class Almacen
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return ProductoAlmacen
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param mixed $productos
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
     }
 
     /**

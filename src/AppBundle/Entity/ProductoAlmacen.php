@@ -46,7 +46,7 @@ class ProductoAlmacen
     private $producto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Almacen")
+     * @ORM\ManyToOne(targetEntity="Almacen", inversedBy="productos")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="almacen_id", referencedColumnName="id")
      * })
@@ -81,9 +81,60 @@ class ProductoAlmacen
         return 10;
     }
 
-    /**
-     * @return mixed
-     */
+    public function getFoto() {
+        return $this->getProducto()->getFoto();
+    }
+
+    public function getFotoBase64() {
+        return $this->getProducto()->getFotoBase64();
+    }
+
+    public function getUpc() {
+        return $this->getProducto()->getUpc();
+    }
+
+    public function getNombre() {
+        return $this->getProducto()->getNombre();
+    }
+
+    public function getCategoria() {
+        return $this->getProducto()->getCategoria();
+    }
+
+    public function getMarca() {
+        return $this->getProducto()->getMarca();
+    }
+
+    public function getPesoGramos()
+    {
+        return $this->getProducto()->getPesoGramos();
+    }
+
+    public function getPesoOnzas()
+    {
+        return $this->getProducto()->getPesoOnzas();
+    }
+
+    public function getPesoLibras()
+    {
+        return $this->getProducto()->getPesoLibras();
+    }
+
+    public function getDescripcionEn()
+    {
+        return $this->getProducto()->getDescripcionEn();
+    }
+
+    public function getDescripcionEs()
+    {
+        return $this->getProducto()->getDescripcionEs();
+    }
+
+    public function getFechaExpiracion()
+    {
+        return $this->getProducto()->getFechaExpiracion();
+    }
+
     public function getId()
     {
         return $this->id;

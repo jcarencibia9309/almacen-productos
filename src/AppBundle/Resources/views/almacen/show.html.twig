@@ -24,6 +24,12 @@
 
                     {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': almacen, 'size': 'col-3'}%}
 
+                    <b>Productos</b>
+                    <br><br>
+                    {% include 'AppBundle::almacen/list_productos.html.twig' with {'almacen': almacen}%}
+
+                    <br>
+
                     <div class="pull-right">
                         <a href="{{ path('almacen_index') }}" class="btn btn-primary btn-sm">Atrás</a>
                     </div>

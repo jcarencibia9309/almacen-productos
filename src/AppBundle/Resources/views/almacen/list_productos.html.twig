@@ -1,0 +1,20 @@
+{%
+    set columns = [
+    {'label': 'Nombre', 'name': 'nombre'},
+    {'label': 'UPC', 'name': 'upc'},
+    {'label': 'Marca', 'name': 'marca'},
+    {'label': 'Categoría', 'name': 'categoria', 'type': 'nomenclator'},
+    {'label': 'Cantidad', 'name': 'cantidad'},
+    {'label': 'Costo', 'name': 'costo'},
+    {'label': 'Importe total', 'name': 'importe'},
+    {'label': 'Precio Venta', 'name': 'precioVenta'}
+]
+%}
+
+{%
+    set actions = [
+        {'label': 'Detalles del producto', 'icon': 'fa fa-list-alt', 'path': 'almacen_producto_show', 'pathParams': {'idAlmacen': almacen.id} },
+    ]
+%}
+
+{% include 'AppBundle::components/table.html.twig' with {'columns': columns, 'items': almacen.productos, 'actions': actions}%}
