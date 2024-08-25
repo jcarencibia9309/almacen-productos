@@ -26,6 +26,22 @@ class CompraService extends BaseService {
     }
 
     /**
+     * @param CompraProducto $compraProducto
+     */
+    public function remove($compraProducto) {
+        $em = $this->getEm();
+
+        $compra = $compraProducto->getCompra();
+        $compra->removeProducto($compraProducto);
+
+        $this->_calcularImporteCompra($compra);
+        $em->persist($compra);
+
+        $em->remove($compraProducto);
+        $em->flush();
+    }
+
+    /**
      * @param Compra $compra
      * @throws \Doctrine\ORM\ORMException
      */
@@ -72,7 +88,7 @@ class CompraService extends BaseService {
             } else {
                 $productoAlmacen->calcularPrecioCompra($compraProducto->getImporte(), $compraProducto->getCantidad());
                 $productoAlmacen->setCantidad($productoAlmacen->getCantidad() + $compraProducto->getCantidad());
-                $productoAlmacen->setImporte($productoAlmacen->getCantidad() * $productoAlmacen->getCosto());
+                $productoAlmacen->calcularImporte();
             }
 
             $productoAlmacen->calcularPrecioVenta();
@@ -95,7 +111,9 @@ class CompraService extends BaseService {
         $producto->setImporte($importe);
         $em->persist($producto);
 
-        $compra->addProducto($producto);
+        if (!$producto->getId()) {
+            $compra->addProducto($producto);
+        }
 
         $this->_calcularImporteCompra($compra);
 

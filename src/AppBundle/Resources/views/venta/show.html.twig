@@ -1,0 +1,41 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    {%
+        set fields = [
+            {'label': 'Fecha de venta', 'name': 'fechaVenta', 'type': 'date'},
+            {'label': 'Almacén origen', 'name': 'almacenOrigen', 'type': 'nomenclator'},
+            {'label': 'Importe', 'name': 'importe'},
+            {'label': 'Estado', 'name': 'estadoProceso', 'type': 'nomenclator'}
+        ]
+    %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Detalles de la venta</strong>
+                </div>
+                <div class="card-body card-block">
+
+                    {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': venta, 'size': 'col-3'}%}
+
+                    <br>
+
+                    <b>Productos</b>
+                    <br>
+                    {% include 'AppBundle::venta/list_productos.html.twig' with {'comra': venta, 'readOnly': true}%}
+
+                    <br>
+
+                    <div class="pull-right">
+                        <a href="{{ path('venta_index') }}" class="btn btn-primary btn-sm">Atrás</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

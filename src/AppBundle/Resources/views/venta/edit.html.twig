@@ -1,0 +1,46 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ title }}</strong>
+                </div>
+                <div class="card-body card-block">
+                    {{ form_start(form) }}
+
+                    <div class="row gap-2">
+                        <div class="col-xs-12 col-md-6">
+                            {{ form_widget(form) }}
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            {% set fields = [{'label': 'Importe', 'name': 'importe'}] %}
+                            {% include 'AppBundle::components/details.html.twig' with {'fields': fields, 'data': venta, 'size': 'col-6'}%}
+                        </div>
+                    </div>
+
+                    {% if venta.id %}
+                        <b>Productos</b>
+                        <br>
+                        {% include 'AppBundle::venta/list_productos.html.twig' with {'comra': venta}%}
+                    {% endif %}
+
+                    <br>
+
+                    <div class="form-actions pull-right">
+                        <a href="{{ path('venta_index') }}" class="btn btn-secondary btn-sm">Cancelar</a>
+                        <button type="submit" class="btn btn-primary btn-sm" name="{{ form.vars.name }}[{{ form.save.vars.name }}]">Guardar</button>
+                        {% if venta.id %}
+                            <button type="submit" class="btn btn-primary btn-sm" name="{{ form.vars.name }}[{{ form.complete.vars.name }}]">Completar</button>
+                        {% endif %}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

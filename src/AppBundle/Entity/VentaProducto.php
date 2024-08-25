@@ -3,11 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name = "rventa_producto")
+ * @UniqueEntity(fields={"producto", "venta"}, message="Ya existe el registro del producto en la venta.")
  */
 class VentaProducto
 {
@@ -43,12 +45,16 @@ class VentaProducto
     private $producto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Venta")
+     * @ORM\ManyToOne(targetEntity="Venta", inversedBy="productos")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="venta_id", referencedColumnName="id")
      * })
      */
     private $venta;
+
+    public function getNombre() {
+        return $this->getProducto()->getNombre();
+    }
 
     /**
      * @return mixed
@@ -115,7 +121,7 @@ class VentaProducto
     }
 
     /**
-     * @return mixed
+     * @return Producto
      */
     public function getProducto()
     {
@@ -131,7 +137,7 @@ class VentaProducto
     }
 
     /**
-     * @return mixed
+     * @return Venta
      */
     public function getVenta()
     {

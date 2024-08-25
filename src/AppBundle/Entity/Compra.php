@@ -48,7 +48,7 @@ class Compra
      */
     private $productos;
 
-    public function canEdit() {
+    public function getCanEdit() {
         return $this->getEstadoProceso()->getId() == EstadoProceso::INICIADA;
     }
 
@@ -142,6 +142,10 @@ class Compra
 
     public function addProducto($producto) {
         $this->productos[] = $producto;
+    }
+
+    public function removeProducto($producto) {
+        $this->productos->removeElement($producto);
     }
 
     /**

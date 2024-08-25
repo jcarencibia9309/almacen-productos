@@ -1,0 +1,38 @@
+{% extends 'AppBundle::app-container.html.twig' %}
+
+{% block view %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ title }}</strong>
+                </div>
+                <div class="card-body card-block">
+                    {{ form_start(form) }}
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            {{ form_widget(form) }}
+                        </div>
+                    </div>
+
+                    <div class="form-actions pull-right">
+                        {% if ventaProducto.id %}
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmModal">Eliminar</button>
+                        {% endif %}
+                        <a href="{{ path('venta_edit', {id: idVenta}) }}" class="btn btn-secondary btn-sm">Cancelar</a>
+                        <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if ventaProducto.id %}
+        {% include 'AppBundle::components/confirm_modal.html.twig' with {'color': 'danger', 'btnLabel':'Eliminar', 'btnForm': delete_form}%}
+    {% endif %}
+
+{% endblock %}

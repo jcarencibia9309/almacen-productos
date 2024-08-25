@@ -3,10 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name = "rproducto_almacen")
+ * @UniqueEntity(fields={"producto", "almacen"}, message="Ya existe el registro del producto en el almacén.")
  */
 class ProductoAlmacen
 {
@@ -62,6 +64,10 @@ class ProductoAlmacen
 
     public function calcularPrecioVenta() {
         return $this->precioVenta = $this->costo + $this->getCostoDomicilio() + $this->getCostoVerificacion();
+    }
+
+    public function calcularImporte() {
+        return $this->importe = $this->getCosto() * $this->getCantidad();
     }
 
     public function getCostoVerificacion() {

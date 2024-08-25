@@ -41,6 +41,23 @@ class Venta
     private $estadoProceso;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Almacen")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="almacen_origen", referencedColumnName="id")
+     * })
+     */
+    private $almacenOrigen;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VentaProducto", mappedBy="venta", cascade={"persist","refresh","remove"})
+     */
+    private $productos;
+
+    public function getCanEdit() {
+        return $this->getEstadoProceso()->getId() == EstadoProceso::INICIADA;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -54,6 +71,46 @@ class Venta
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlmacenOrigen()
+    {
+        return $this->almacenOrigen;
+    }
+
+    /**
+     * @param mixed $almacenOrigen
+     */
+    public function setAlmacenOrigen($almacenOrigen)
+    {
+        $this->almacenOrigen = $almacenOrigen;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    public function addProducto($producto) {
+        $this->productos[] = $producto;
+    }
+
+    public function removeProducto($producto) {
+        $this->productos->removeElement($producto);
+    }
+
+    /**
+     * @param mixed $productos
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
     }
 
     /**

@@ -3,11 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name = "rcompra_producto")
+ * @UniqueEntity(fields={"producto", "compra"}, message="Ya existe el registro del producto en la compra.")
  */
 class CompraProducto
 {
