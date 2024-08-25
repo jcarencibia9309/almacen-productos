@@ -4,10 +4,10 @@
 namespace AppBundle\Controller\Api;
 
 use AppBundle\Core\Base\BaseController;
-use JMS\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
 
 class InventarioApiController extends BaseController
 {
