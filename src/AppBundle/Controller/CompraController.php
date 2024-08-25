@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Core\Base\BaseController;
 use AppBundle\Entity\CompraProducto;
+use AppBundle\Entity\EstadoProceso;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,6 +29,7 @@ class CompraController extends BaseController
 
         return $this->render('AppBundle:compra:index.html.twig', array(
             'compras' => $compras,
+            'canEdit' => function (Compra $compra) { return $compra->getEstadoProceso() == EstadoProceso::INICIADA; }
         ));
     }
 

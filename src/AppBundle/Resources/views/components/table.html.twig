@@ -19,10 +19,12 @@
                 {% if readOnly == false %}
                     <td>
                         {% for action in actions %}
-                            {% set pathParams = action.pathParams is defined ? action.pathParams : {} %}
-                            <a href="{{ path(action.path, { 'id': item.id }|merge(pathParams)) }}" class="btn text-primary" title="{{ action.label }}">
-                                <i class="{{ action.icon }}"></i>
-                            </a>
+                            {% if action.show is not defined or attribute(item, action.show) == true %}
+                                {% set pathParams = action.pathParams is defined ? action.pathParams : {} %}
+                                <a href="{{ path(action.path, { 'id': item.id }|merge(pathParams)) }}" class="btn text-primary" title="{{ action.label }}">
+                                    <i class="{{ action.icon }}"></i>
+                                </a>
+                            {% endif %}
                         {% endfor %}
                     </td>
                 {% endif %}

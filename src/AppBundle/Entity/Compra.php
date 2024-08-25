@@ -48,6 +48,9 @@ class Compra
      */
     private $productos;
 
+    public function canEdit() {
+        return $this->getEstadoProceso()->getId() == EstadoProceso::INICIADA;
+    }
 
     /**
      * @return mixed
@@ -114,7 +117,7 @@ class Compra
     }
 
     /**
-     * @return mixed
+     * @return EstadoProceso
      */
     public function getEstadoProceso()
     {

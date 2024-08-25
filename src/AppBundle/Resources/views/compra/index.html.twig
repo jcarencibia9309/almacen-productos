@@ -4,18 +4,18 @@
 
     {%
         set columns = [
-            {'label': 'Fecha de Recepción', 'name': 'fechaRecepcion', 'type': 'date'},
-            {'label': 'Almacén destino', 'name': 'almacenDestino', 'type': 'nomenclator'},
-            {'label': 'Importe', 'name': 'importe'},
-            {'label': 'Estado', 'name': 'estadoProceso', 'type': 'nomenclator'}
-        ]
+        {'label': 'Fecha de Recepción', 'name': 'fechaRecepcion', 'type': 'date'},
+        {'label': 'Almacén destino', 'name': 'almacenDestino', 'type': 'nomenclator'},
+        {'label': 'Importe', 'name': 'importe'},
+        {'label': 'Estado', 'name': 'estadoProceso', 'type': 'nomenclator'}
+    ]
     %}
 
     {%
         set actions = [
-            {'label': 'Detalles', 'icon': 'fa fa-list-alt', 'path': 'compra_show' },
-            {'label': 'Modificar', 'icon': 'fa fa-pencil', 'path': 'compra_edit' }
-        ]
+        {'label': 'Detalles', 'icon': 'fa fa-list-alt', 'path': 'compra_show' },
+        {'label': 'Modificar', 'icon': 'fa fa-pencil', 'path': 'compra_edit', 'show': 'canEdit' }
+    ]
     %}
 
     <div class="row">
