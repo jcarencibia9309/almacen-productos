@@ -135,7 +135,7 @@ class CompraProducto
     }
 
     /**
-     * @return mixed
+     * @return Compra
      */
     public function getCompra()
     {

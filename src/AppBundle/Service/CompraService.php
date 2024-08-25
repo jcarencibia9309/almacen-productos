@@ -6,13 +6,14 @@ use AppBundle\Core\Base\BaseService;
 use AppBundle\Entity\Compra;
 use AppBundle\Entity\CompraProducto;
 use AppBundle\Entity\EstadoProceso;
+use AppBundle\Entity\ProductoAlmacen;
 
 class CompraService extends BaseService {
 
     /**
      * @return array
      */
-    function getAll() {
+    public function getAll() {
         return $this->getEm()->getRepository('AppBundle:Compra')->findAll();
     }
 
@@ -20,7 +21,7 @@ class CompraService extends BaseService {
      * @param $id
      * @return Compra|object
      */
-    function get($id) {
+    public function get($id) {
         return $this->getEm()->getRepository('AppBundle:Compra')->find($id);
     }
 
@@ -28,7 +29,7 @@ class CompraService extends BaseService {
      * @param Compra $compra
      * @throws \Doctrine\ORM\ORMException
      */
-    function save($compra) {
+    public function save($compra) {
         $em = $this->getEm();
 
         if (!$compra->getId()) {
@@ -40,16 +41,63 @@ class CompraService extends BaseService {
     }
 
     /**
+     * @param Compra $compra
+     * @return string[]
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function complete($compra) {
+        $em = $this->getEm();
+
+        if (count($compra->getProductos()) == 0) {
+            return array('Debe de adicionar al menos un producto');
+        }
+
+        $compra->setEstadoProceso($em->getReference('AppBundle:EstadoProceso', EstadoProceso::COMPLETADA));
+        $almacen = $compra->getAlmacenDestino();
+
+        foreach ($compra->getProductos() as $compraProducto) {
+            /** @var CompraProducto  $compraProducto */
+            /** @var ProductoAlmacen $productoAlmacen */
+            $productoAlmacen = $em->getRepository('AppBundle:ProductoAlmacen')->findOneBy(array(
+                'almacen' => $compra->getAlmacenDestino(),
+                'producto' => $compraProducto->getProducto()
+            ));
+            if (!$productoAlmacen) {
+                $productoAlmacen = new ProductoAlmacen();
+                $productoAlmacen->setAlmacen($almacen);
+                $productoAlmacen->setProducto($compraProducto->getProducto());
+                $productoAlmacen->setImporte($compraProducto->getImporte());
+                $productoAlmacen->setCantidad($compraProducto->getCantidad());
+                $productoAlmacen->setCosto($compraProducto->getPrecioCompra());
+            } else {
+                $productoAlmacen->calcularPrecioCompra($compraProducto->getImporte(), $compraProducto->getCantidad());
+                $productoAlmacen->setCantidad($productoAlmacen->getCantidad() + $compraProducto->getCantidad());
+                $productoAlmacen->setImporte($productoAlmacen->getCantidad() * $productoAlmacen->getCosto());
+            }
+
+            $productoAlmacen->calcularPrecioVenta();
+            $em->persist($productoAlmacen);
+        }
+
+        $em->persist($compra);
+        $em->flush();
+    }
+
+    /**
      * @param CompraProducto $producto
      */
-    function saveProducto($producto) {
+    public function saveProducto($producto) {
         $em = $this->getEm();
+
+        $compra = $producto->getCompra();
+
         $importe = $producto->getPrecioCompra() * $producto->getCantidad();
         $producto->setImporte($importe);
         $em->persist($producto);
 
-        $compra = $producto->getCompra();
-        $this->_calcularImporte($compra);
+        $compra->addProducto($producto);
+
+        $this->_calcularImporteCompra($compra);
 
         $em->persist($compra);
 
@@ -59,7 +107,7 @@ class CompraService extends BaseService {
     /**
      * @param Compra $compra
      */
-    private function _calcularImporte($compra) {
+    private function _calcularImporteCompra($compra) {
         $importe = 0;
         foreach ($compra->getProductos() as $producto) {
             $importe += $producto->getImporte();

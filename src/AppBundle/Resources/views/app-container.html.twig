@@ -6,7 +6,15 @@
 
     <div id="right-panel" class="right-panel">
         {% include 'AppBundle::layouts/header.html.twig' %}
+
+        {% include 'AppBundle::layouts/alerts.html.twig' with {
+            'errors': errors is defined ? errors : [],
+            'warnings': warnings is defined ? warnings : [],
+            'success': success is defined and success
+        } %}
+
         {% include 'AppBundle::layouts/breadcrumbs.html.twig' %}
+
         <div class="content">
             <div class="animated fadeIn">
                 {% block view %}{% endblock %}

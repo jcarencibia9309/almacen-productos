@@ -31,9 +31,9 @@
 
                     <div class="form-actions pull-right">
                         <a href="{{ path('compra_index') }}" class="btn btn-secondary btn-sm">Cancelar</a>
-                        <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                        <button type="submit" class="btn btn-primary btn-sm" name="{{ form.vars.name }}[{{ form.save.vars.name }}]">Guardar</button>
                         {% if compra.id %}
-                            <button type="submit" class="btn btn-primary btn-sm">Completar</button>
+                            <button type="submit" class="btn btn-primary btn-sm" name="{{ form.vars.name }}[{{ form.complete.vars.name }}]">Completar</button>
                         {% endif %}
                     </div>
 

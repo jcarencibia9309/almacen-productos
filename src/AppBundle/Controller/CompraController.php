@@ -69,15 +69,23 @@ class CompraController extends BaseController
         $form = $this->createForm('AppBundle\Form\CompraType', $compra);
         $form->handleRequest($request);
 
+        $errors = array();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getCompraSrv()->save($compra);
-            return $this->redirectToRoute('compra_index');
+            if ($form->get('complete')->isClicked()) {
+                $errors = $this->getCompraSrv()->complete($compra);
+            }
+            if (!$errors) {
+                return $this->redirectToRoute('compra_index');
+            }
         }
 
         return $this->render('AppBundle:compra:edit.html.twig', array(
             'compra' => $compra,
             'form' => $form->createView(),
-            'title' => 'Modificar compra'
+            'title' => 'Modificar compra',
+            'errors' => $errors
         ));
     }
 

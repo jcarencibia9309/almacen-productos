@@ -288,7 +288,7 @@ class Producto
     }
 
     /**
-     * @return mixed
+     * @return Categoria
      */
     public function getCategoria()
     {

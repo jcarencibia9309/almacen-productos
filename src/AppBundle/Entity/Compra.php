@@ -137,6 +137,10 @@ class Compra
         return $this->productos;
     }
 
+    public function addProducto($producto) {
+        $this->productos[] = $producto;
+    }
+
     /**
      * @param mixed $productos
      */

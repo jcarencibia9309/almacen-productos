@@ -26,7 +26,9 @@ class CompraType extends AbstractType
                         ->andWhere('a.activo = true')
                         ->orderBy('a.nombre', 'ASC');
                 },
-            ));
+            ))
+            ->add('save', 'submit', array('attr' => array('class' => 'd-none')))
+            ->add('complete', 'submit', array('attr' => array('class' => 'd-none')));
         ;
     }
     
